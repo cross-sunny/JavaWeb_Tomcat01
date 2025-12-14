@@ -2,7 +2,7 @@
 <html>
 <head>
   <%-- 匹配web目录下的logo.png --%>
-  <%--  测试 --%>
+  <%--  提交测试 --%>
   <link rel="icon" href="${pageContext.request.contextPath}/web/logo.png" type="image/png">
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/web/logo.png" type="image/png">
   <title>用户登录</title>
