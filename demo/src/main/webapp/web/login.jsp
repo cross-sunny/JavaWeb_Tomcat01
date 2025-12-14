@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <html>
 <head>
+
   <%-- 匹配web目录下的logo.png --%>
   <%-- 匹配web目录下的logo.png --%>
   <link rel="icon" href="${pageContext.request.contextPath}/web/logo.png" type="image/png">
