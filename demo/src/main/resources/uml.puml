@@ -1,0 +1,72 @@
+@startuml 登录系统全流程UML图
+' 修复样式语法错误（原linetype拼写错误，已修正为lineType）
+skinparam classAttributeIconSize 0
+skinparam classFontName "Microsoft YaHei"
+skinparam arrowFontName "Microsoft YaHei"
+skinparam interfaceStyle rectangle
+skinparam lineType ortho  ' 修正拼写：linetype → lineType
+
+' 1. 后端Java类（核心逻辑）
+class DBUtil {
+  - URL: String = "jdbc:mysql://localhost:3306/login?..."
+  - USER: String = "root"
+  - PASSWORD: String = "passerby20051204"
+  + static {}  // 静态代码块：加载MySQL驱动
+  + getConnection(): Connection  // 获取数据库连接
+  + close(rs: ResultSet, pstmt: PreparedStatement, conn: Connection): void  // 修复拼写：pstmt（正确）
+}
+
+class UserServlet extends HttpServlet {
+  + doPost(request: HttpServletRequest, response: HttpServletResponse): void  // 处理POST请求
+  - handleRegister(request: HttpServletRequest, response: HttpServletResponse): void  // 处理注册逻辑
+}
+
+' 2. JSP页面（功能节点）
+interface login.jsp {
+  + 功能：用户登录表单（用户名+密码+九宫格验证码）
+  + 交互：提交请求到check.jsp
+}
+
+interface register.jsp {
+  + 功能：用户注册表单（用户名+真实姓名+密码+确认密码）
+  + 交互：提交请求到UserServlet
+}
+
+interface check.jsp {
+  + 功能：登录验证（用户名+密码+验证码）
+  + 依赖：DBUtil（数据库查询）
+  + 依赖：session（存储登录状态/验证码）
+}
+
+interface success.jsp {
+  + 功能：登录成功首页（显示真实姓名）
+  + 依赖：DBUtil（查询用户真实姓名）
+  + 依赖：session（验证登录状态）
+  + 交互：提供「系统注销」按钮跳转logout.jsp
+}
+
+interface logout.jsp {
+  + 功能：系统注销（物理删除用户+销毁session）
+  + 依赖：DBUtil（删除用户数据）
+  + 依赖：session（销毁登录状态）
+}
+
+' 3. 关系定义（修复继承关系语法）
+' 依赖关系：虚线箭头
+UserServlet --> DBUtil : 依赖（注册时数据库操作）
+check.jsp --> DBUtil : 依赖（登录验证查询）
+success.jsp --> DBUtil : 依赖（查询真实姓名）
+logout.jsp --> DBUtil : 依赖（删除用户数据）
+
+' 继承关系：修正语法（→|> 改为 --|>）
+UserServlet --|> HttpServlet : 继承（Servlet父类）
+
+' 流程跳转关系：实线箭头
+register.jsp --> UserServlet : 提交注册请求
+login.jsp --> check.jsp : 提交登录请求
+check.jsp --> success.jsp : 跳转（登录+验证码均正确）
+check.jsp --> login.jsp : 跳转（登录失败/验证码错误）
+success.jsp --> logout.jsp : 跳转（点击系统注销）
+logout.jsp --> login.jsp : 跳转（注销后返回登录页）
+
+@enduml

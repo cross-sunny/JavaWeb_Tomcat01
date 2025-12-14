@@ -1,0 +1,240 @@
+/* ======== 重置 ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+    /* 统一过渡动画（丝滑交互基础） */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    min-height: 100vh;
+    padding: 40px 0;
+    background: radial-gradient(circle at 20% 30%, rgba(105,80,180,0.5), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.4), transparent 50%),
+    linear-gradient(135deg, #1f1c2c, #928dab);
+    color: #fff;
+}
+
+/* ======== 通用毛玻璃卡片 ======== */
+.card, .form-wrap {
+    width: 90%;
+    max-width: 850px;
+    margin: 0 auto 30px;
+    padding: 32px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.28);
+    animation: fadeIn 0.7s ease;
+}
+
+h2, h3 {
+    margin-bottom: 22px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* ======== 输入框/选择框/文件上传（统一圆角+丝滑交互） ======== */
+.input-group, .form-row {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    opacity: 0.9;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* 文本输入框 */
+input[type="text"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 16px; /* 增大圆角，更美观 */
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    outline: none;
+}
+
+/* 输入框聚焦效果 */
+input:focus,
+select:focus {
+    border-color: #b493ff;
+    background: rgba(255,255,255,0.30);
+    box-shadow: 0 0 0 3px rgba(180, 147, 255, 0.2); /* 聚焦发光效果 */
+}
+
+/* 文件上传按钮美化 */
+input[type="file"] {
+    cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+}
+input[type="file"]::file-selector-button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+}
+
+/* 选择框下拉箭头美化 */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath d='M8 11l4-4H4l4 4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+/* ======== 按钮（统一圆角+增强交互） ======== */
+.btn, .op-btn {
+    padding: 12px 22px;
+    border-radius: 16px; /* 增大圆角 */
+    background: linear-gradient(90deg, #7b5bff, #ff4fa8);
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    outline: none;
+    box-shadow: 0 4px 12px rgba(123, 91, 255, 0.3);
+}
+
+/* 按钮悬浮/点击效果（丝滑） */
+.btn:hover, .op-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(123, 91, 255, 0.4);
+}
+.btn:active, .op-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(123, 91, 255, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+}
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 6px 16px rgba(255,255,255,0.15);
+}
+
+/* 删除按钮 */
+.op-del {
+    background: #d63b4a;
+    box-shadow: 0 4px 12px rgba(214, 59, 74, 0.3);
+}
+.op-del:hover {
+    filter: brightness(1.25);
+    box-shadow: 0 6px 16px rgba(214, 59, 74, 0.4);
+}
+
+/* ======== 表格美化（统一圆角+交互） ======== */
+.table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: separate; /* 支持border-radius */
+    border-spacing: 0;
+    border-radius: 16px; /* 表格整体圆角 */
+    overflow: hidden; /* 裁剪内部元素，显示圆角 */
+    backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+.table th {
+    background: rgba(255,255,255,0.18);
+    padding: 14px 10px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.table td {
+    padding: 12px 10px;
+    background: rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+/* 表格悬浮行 */
+.table tbody tr:hover {
+    background: rgba(255,255,255,0.20);
+    transform: scale(1.005); /* 轻微放大，增强交互 */
+}
+
+/* 表格第一列和最后一列圆角适配 */
+.table tr:first-child th:first-child { border-top-left-radius: 16px; }
+.table tr:first-child th:last-child { border-top-right-radius: 16px; }
+.table tr:last-child td:first-child { border-bottom-left-radius: 16px; }
+.table tr:last-child td:last-child { border-bottom-right-radius: 16px; }
+
+/* 图片缩略图 */
+.thumb {
+    width: 110px;
+    height: 65px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+    cursor: pointer;
+}
+.thumb:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+}
+
+/* 卡片展示广告样式 */
+.ad-card {
+    width: 300px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.ad-card:hover {
+    transform: translateY(-6px) scale(1.02); /* 组合动画，更丝滑 */
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+.ad-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.ad-card .title {
+    padding: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* ======== 动画 ======== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======== 响应式适配（可选，优化移动端体验） ======== */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
+    .btn, .op-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+    .ad-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}

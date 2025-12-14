@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Ad/ad_add.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Ad" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Ad/ad_add_do.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Ad" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Ad/ad_list.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Ad" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Ad/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Ad" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/demo2/echo.jsp" value="file://$PROJECT_DIR$/src/main/webapp/demo2" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/demo2/read-form.html" value="file://$PROJECT_DIR$/src/main/webapp/demo2" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/demo2/show.jsp" value="file://$PROJECT_DIR$/src/main/webapp/demo2" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/set_status.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/captcha.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/check.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/logout.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/register.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/web/success.jsp" value="file://$PROJECT_DIR$/src/main/webapp/web" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/work1/file_load.jsp" value="file://$PROJECT_DIR$/src/main/webapp/work1" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/work1/file_upload.jsp" value="file://$PROJECT_DIR$/src/main/webapp/work1" />
+      </map>
+    </option>
+  </component>
+</project>

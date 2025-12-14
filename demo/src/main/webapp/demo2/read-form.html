@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>异步消息发送</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; margin: 40px; background: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #1976d2; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: "Microsoft YaHei", sans-serif;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📨 发送异步消息</h1>
+
+    <form id="messageForm" action="/demo/demo2/read" method="post">
+        <div class="form-group">
+            <label for="message">请输入消息（支持中文）:</label>
+            <textarea id="message" name="message" required placeholder="输入你的消息...">你好，世界！</textarea>
+        </div>
+
+        <button type="submit">发送消息</button>
+    </form>
+
+</div>
+
+<script>
+    // 防止重复提交
+    document.getElementById('messageForm').addEventListener('submit', function() {
+        const button = this.querySelector('button');
+        button.disabled = true;
+        button.textContent = '发送中...';
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!-- 欢迎页配置（原有，不修改） -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>web/login.jsp</welcome-file>
+    </welcome-file-list>
+
+<!--    &lt;!&ndash; ✅ 新增：登录认证过滤器（核心新增部分） &ndash;&gt;-->
+<!--    <filter>-->
+<!--        <filter-name>LoginFilter</filter-name>-->
+<!--        <filter-class>com.example.filter.LoginFilter</filter-class>-->
+<!--        &lt;!&ndash; 初始化参数：对应check.jsp中session存储的用户标识（loginUser） &ndash;&gt;-->
+<!--        <init-param>-->
+<!--            <param-name>auth</param-name>-->
+<!--            <param-value>loginUser</param-value> &lt;!&ndash; 和session.setAttribute的key完全一致！ &ndash;&gt;-->
+<!--        </init-param>-->
+<!--    </filter>-->
+<!--    &lt;!&ndash; 配置需要登录才能访问的路径（精准拦截，不影响登录相关页面） &ndash;&gt;-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>LoginFilter</filter-name>-->
+<!--        <url-pattern>/Ad/*</url-pattern> &lt;!&ndash; 广告模块：所有页面需登录 &ndash;&gt;-->
+<!--    </filter-mapping>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>LoginFilter</filter-name>-->
+<!--        <url-pattern>/work1/*</url-pattern> &lt;!&ndash; 文件模块：所有页面需登录 &ndash;&gt;-->
+<!--    </filter-mapping>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>LoginFilter</filter-name>-->
+<!--        <url-pattern>/web/success.jsp</url-pattern> &lt;!&ndash; 登录成功页：需登录 &ndash;&gt;-->
+<!--    </filter-mapping>-->
+
+    <!-- 以下是原有配置，全部保留，不做任何修改 -->
+    <servlet>
+        <servlet-name>AdAddDoJsp</servlet-name>
+        <jsp-file>/Ad/ad_add_do.jsp</jsp-file>
+        <multipart-config>
+            <location>C:\Windows\Temp</location>
+            <max-file-size>52428800</max-file-size>
+            <max-request-size>104857600</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdAddDoJsp</servlet-name>
+        <url-pattern>/Ad/ad_add_do.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdUpdateJsp</servlet-name>
+        <jsp-file>/Ad/ad_update.jsp</jsp-file>
+        <multipart-config>
+            <location>C:\Windows\Temp</location>
+            <max-file-size>52428800</max-file-size>
+            <max-request-size>104857600</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdUpdateJsp</servlet-name>
+        <url-pattern>/Ad/ad_update.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdUpdateDoJsp</servlet-name>
+        <jsp-file>/Ad/ad_update_do.jsp</jsp-file>
+        <multipart-config>
+            <location>C:\Windows\Temp</location>
+            <max-file-size>52428800</max-file-size>
+            <max-request-size>104857600</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdUpdateDoJsp</servlet-name>
+        <url-pattern>/Ad/ad_update_do.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FileUploadJsp</servlet-name>
+        <jsp-file>/work1/file_upload.jsp</jsp-file>
+        <multipart-config>
+            <location>C:\Windows\Temp</location>
+            <max-file-size>52428800</max-file-size>
+            <max-request-size>104857600</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadJsp</servlet-name>
+        <url-pattern>/work1/file_upload.jsp</url-pattern>
+    </servlet-mapping>
+
+</web-app>

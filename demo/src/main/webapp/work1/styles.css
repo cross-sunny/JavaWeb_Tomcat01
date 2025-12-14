@@ -1,0 +1,244 @@
+/* 仅作用于work1下的页面，与登录注册样式完全隔离 */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* 使用work1目录下的filebg.jpg作为背景 */
+    background: url("filebg.jpg") no-repeat center center fixed;
+    background-size: cover; /* 背景图自适应全屏 */
+    font-family: "Microsoft YaHei", sans-serif;
+    padding: 40px 20px; /* 页面边缘留白，避免内容贴边 */
+}
+
+/* 容器：半透明玻璃拟态，与背景融合 */
+.work1-container {
+    max-width: 600px; /* 之前缩小后的宽度，保持不变 */
+    margin: 0 auto;
+    padding: 40px;
+    /* 核心修改：调整 RGBA 最后一个数值（透明度），0.6 比 0.85 更透，背景更明显 */
+    background: rgba(255, 255, 255, 0.5); /* 重点：最后一个值 0.6 控制背景透明度 */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px); /* 毛玻璃效果（可选，保留不影响） */
+}
+
+/* 标题：适配背景色调（暖色系） */
+.work1-container h2 {
+    color: #e67e22; /* 暖橙色，与背景图中女孩衣服颜色呼应 */
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 26px;
+    text-align: center; /* 标题居中 */
+}
+
+/* 表单样式优化 */
+.work1-form .form-group {
+    margin-bottom: 25px;
+}
+
+/* 核心修改1：标签文字（用户名、选择文件）贴合背景 - 暖白色+文字阴影 */
+.work1-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #f8f5f0; /* 暖白色，贴合暖色调背景，比纯白更协调 */
+    font-weight: 600;
+    font-size: 16px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 轻微阴影，增强可读性不突兀 */
+}
+
+/* 核心修改2：输入框（用户名+文件选择容器）统一圆润风格，贴合背景 */
+.work1-form input[type="text"],
+.file-input-wrapper {
+    width: 100%;
+    padding: 11px 13px; /* 保持原有内边距 */
+    border-radius: 12px; /* 核心：圆角加大到12px，更圆润（原10px） */
+    background: rgba(255, 255, 255, 0.35); /* 透明背景，贴合玻璃拟态 */
+    border: 1px solid rgba(243, 156, 18, 0.6); /* 暖橙色边框，与标题色调一致 */
+    font-size: 15px;
+    transition: all 0.25s ease; /* 过渡更丝滑 */
+    box-sizing: border-box;
+    color: #34495e; /* 文字颜色清晰 */
+}
+
+/* 文件选择框特殊处理（自定义容器，避免原生按钮生硬） */
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 11px 13px; /* 与用户名输入框内边距一致 */
+}
+
+/* 隐藏原生文件选择框（丑陋且无法直接样式化） */
+.work1-form input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 100px; /* 扩大点击区域，避免漏点 */
+}
+
+/* 自定义文件选择按钮文字（替代原生“选择文件”） */
+.file-input-placeholder {
+    color: #34495e;
+    font-size: 15px;
+}
+
+/* 核心修改：聚焦效果保持暖色调一致 */
+.work1-form input[type="text"]:focus,
+.file-input-wrapper:hover {
+    border-color: #e67e22; /* 聚焦/悬浮时加深暖橙色边框 */
+    background: rgba(255, 255, 255, 0.55); /* 背景更不透明，增强交互感 */
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.4); /* 暖橙色光晕，贴合风格 */
+    outline: none;
+}
+
+/* 按钮样式优化：暖色调适配背景（保持原有，仅调整按钮圆角更圆润） */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px; /* 核心：按钮圆角加大到12px，与输入框统一圆润风格 */
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #e67e22; /* 主按钮用暖橙色 */
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #d35400; /* hover时加深 */
+    transform: translateY(-2px); /* 轻微上浮 */
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.3);
+}
+
+.btn-reset {
+    background: #f5f5f5;
+    color: #7f8c8d;
+}
+
+.btn-reset:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* 提示信息优化 */
+.message {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.message.success {
+    background: rgba(46, 204, 113, 0.15);
+    color: #27ae60;
+    border: 1px solid #2ecc71;
+}
+
+.message.error {
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+}
+
+/* 文件列表优化 */
+.file-list {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed #f39c12; /* 暖橙色分隔线 */
+}
+
+.file-list h3 {
+    color: #e67e22;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.file-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* 核心修改3：文件列表项 - 悬浮丝滑动效优化 */
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px; /* 圆角加大到12px，更圆润 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 丝滑过渡曲线（加速+减速） */
+    border: 1px solid transparent; /* 预留边框位置，避免悬浮时抖动 */
+}
+
+/* 悬浮效果：丝滑上浮+阴影+暖橙色边框 */
+.file-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(5px) translateY(-3px); /* 横向偏移+轻微上浮，更灵动 */
+    box-shadow: 0 8px 15px rgba(243, 156, 18, 0.2); /* 暖色调柔和阴影 */
+    border-color: rgba(243, 156, 18, 0.4); /* 悬浮时显示暖橙色边框，增强交互感 */
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-meta {
+    font-size: 11px;
+    color: #7f8c8d;
+    margin-top: 4px;
+}
+
+.file-actions {
+    margin-left: 10px;
+}
+
+.file-list a {
+    color: #e67e22; /* 文件名链接用暖橙色 */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.25s ease; /* 链接颜色过渡更丝滑 */
+}
+
+.file-list a:hover {
+    text-decoration: underline;
+    color: #d35400; /* 链接hover色，与按钮hover色一致 */
+}
+
+.file-list .empty {
+    color: #f8f5f0; /* 空列表提示文字，暖白色贴合背景 */
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 核心修改4：删除按钮更圆润，动效丝滑 */
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px; /* 圆角加大到8px，更圆润（原4px） */
+    padding: 6px 10px; /* 加大内边距，手感更好 */
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.25s ease; /* 背景+阴影过渡更丝滑 */
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+    transform: translateY(-1px); /* 轻微上浮 */
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3); /* 柔和阴影，增强层次感 */
+}

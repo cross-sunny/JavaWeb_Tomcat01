@@ -1,0 +1,526 @@
+/* ---------------- 全局重置 & 基础风格 ---------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: "SF Pro Text", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #e0e0e7;
+    background: linear-gradient(180deg, #0f1023 0%, #121529 50%, #0f1023 100%),
+    radial-gradient(circle at 50% 50%, rgba(120, 90, 255, 0.05) 0%, transparent 70%);
+    overflow-y: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* 背景光斑 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 15%;
+    left: 15%;
+    width: 750px; /* 500px × 1.5 = 750px */
+    height: 750px; /* 500px × 1.5 = 750px */
+    background: radial-gradient(circle, rgba(120, 90, 255, 0.22), rgba(120, 200, 255, 0.12) 40%, transparent 70%);
+    filter: blur(105px); /* 70px × 1.5 = 105px */
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 15%;
+    right: 15%;
+    width: 675px; /* 450px × 1.5 = 675px */
+    height: 675px; /* 450px × 1.5 = 675px */
+    background: radial-gradient(circle, rgba(80, 200, 255, 0.2), rgba(120, 90, 255, 0.1) 40%, transparent 70%);
+    filter: blur(105px); /* 70px × 1.5 = 105px */
+    z-index: 0;
+}
+
+/* 粒子画布 */
+#particle-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 主容器 */
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px; /* 20px × 1.5 = 30px */
+    position: relative;
+    z-index: 2;
+}
+
+/* 登录/注册容器（扩大150%） */
+.glass-card {
+    width: 120%; /* 原80% × 1.5 = 120%（基于之前缩小80%的基础扩大） */
+    max-width: 384px; /* 256px × 1.5 = 384px */
+    border-radius: 27px; /* 18px × 1.5 = 27px */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.12); /* 1px × 1.5 = 2px */
+    box-shadow:
+            0 23px 53px rgba(4, 6, 22, 0.65), /* 15px×35px ×1.5=22.5×52.5 */
+            0 12px 30px rgba(16, 10, 40, 0.45), /* 8px×20px ×1.5=12×30 */
+            0 5px 12px rgba(120, 90, 255, 0.08) inset, /* 3px×8px ×1.5=4.5×12 */
+            0 0 0 2px rgba(120, 90, 255, 0.05); /* 1px ×1.5=2px */
+    backdrop-filter: blur(18px) saturate(1.2); /* 12px ×1.5=18px */
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 容器hover效果 */
+.glass-card:hover {
+    transform: scale(1.02);
+    box-shadow:
+            0 30px 60px rgba(4, 6, 22, 0.7), /* 20px×40px ×1.5=30×60 */
+            0 18px 38px rgba(16, 10, 40, 0.5), /* 12px×25px ×1.5=18×37.5 */
+            0 5px 12px rgba(120, 90, 255, 0.1), /* 3px×8px ×1.5=4.5×12 */
+            0 0 0 2px rgba(120, 90, 255, 0.08); /* 1px ×1.5=2px */
+}
+
+/* 容器装饰光效 */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -105px; /* 70px ×1.5=105px */
+    right: -105px; /* 70px ×1.5=105px */
+    width: 330px; /* 220px ×1.5=330px */
+    height: 330px; /* 220px ×1.5=330px */
+    background: radial-gradient(circle, rgba(120, 90, 255, 0.25), transparent 70%);
+    filter: blur(60px); /* 40px ×1.5=60px */
+    z-index: 1;
+}
+
+.glass-card::after {
+    content: '';
+    position: absolute;
+    bottom: -105px; /* 70px ×1.5=105px */
+    left: -105px; /* 70px ×1.5=105px */
+    width: 300px; /* 200px ×1.5=300px */
+    height: 300px; /* 200px ×1.5=300px */
+    background: radial-gradient(circle, rgba(80, 200, 255, 0.22), transparent 70%);
+    filter: blur(60px); /* 40px ×1.5=60px */
+    z-index: 1;
+}
+
+/* 内容区（扩大150%） */
+.content-section {
+    padding: 50px 25px; /* 45px×20px ×1.5=67.5×30 */
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+/* 表单头部（扩大150%） */
+.form-header {
+    margin-bottom: 30px; /* 20px ×1.5=30px */
+    text-align: center;
+}
+
+.form-title {
+    font-size: 24px; /* 16px ×1.5=24px */
+    font-weight: 700;
+    color: #f8f8ff;
+    margin-bottom: 7px; /* 4.8px ×1.5=7.2 */
+    letter-spacing: 0.5px; /* 0.3px ×1.5=0.45 */
+}
+
+.form-subtitle {
+    font-size: 13px; /* 8.8px ×1.5=13.2 */
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+/* ---------- 输入框基础样式（扩大150%） ---------- */
+.input-group {
+    margin-bottom: 22px; /* 14.4px ×1.5=21.6 */
+    position: relative;
+    text-align: center;
+}
+
+/* 用户名/密码输入框（扩大150%） */
+.input-group input {
+    width: 269px; /* 179.2px ×1.5=268.8 */
+    padding: 14px 15px; /* 9px×10px ×1.5=13.5×15 */
+    border-radius: 8px; /* 5.6px ×1.5=8.4 */
+    border: 2px solid rgba(255, 255, 255, 0.1); /* 1px ×1.5=2px */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    color: #f8f8ff;
+    outline: none;
+    transition: all 0.2s ease;
+    font-size: 16px; /* 9.6px ×1.5=14.4 */
+}
+
+/* 输入框聚焦效果 */
+.input-group input:focus {
+    box-shadow: 0 0 0 3px rgba(120, 90, 255, 0.2), 0 6px 18px rgba(80, 60, 200, 0.16); /* 2px×4px ×1.5=3×6 */
+    border-color: rgba(120, 90, 255, 0.6);
+    transform: translateY(-2px); /* 1px ×1.5=2px */
+}
+
+/* 输入框placeholder样式 */
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px; /* 8.8px ×1.5=13.2 */
+    opacity: 1;
+}
+
+/* ---------- 密码眼睛图标（扩大150%） ---------- */
+.password-toggle {
+    position: absolute;
+    right: calc((100% - 269px)/2 + 12px); /* 8px ×1.5=12px */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(120, 90, 255, 0.7);
+    font-size: 22px; /* 14.4px ×1.5=21.6 */
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.password-toggle.closed::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px; /* 17.6px ×1.5=26.4 */
+    height: 2px; /* 1.6px ×1.5=2.4 */
+    background: rgba(120, 90, 255, 0.7);
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.password-toggle:hover {
+    color: rgba(120, 90, 255, 0.9);
+}
+
+/* ---------- 验证码区域（扩大150%，保持比例） ---------- */
+.code-row {
+    display: flex;
+    align-items: center;
+    width: 269px; /* 179.2px ×1.5=268.8（与用户名输入框一致） */
+    margin: 0 auto 22px; /* 14.4px ×1.5=21.6 */
+    gap: 18px; /* 12px ×1.5=18px */
+}
+
+/* 验证码输入框（扩大150%，保持1.2倍比例） */
+.code-row input {
+    width: 136px; /* 90.7px ×1.5=136.05（图片宽度113px ×1.2=135.6） */
+    padding: 14px 15px; /* 9px×10px ×1.5=13.5×15 */
+    border-radius: 8px; /* 5.6px ×1.5=8.4 */
+    border: 2px solid rgba(255, 255, 255, 0.1); /* 1px ×1.5=2px */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    color: #f8f8ff;
+    outline: none;
+    font-size: 16px; /* 9.6px ×1.5=14.4 */
+}
+
+/* 验证码输入框聚焦效果 */
+.code-row input:focus {
+    box-shadow: 0 0 0 3px rgba(120, 90, 255, 0.2), 0 6px 18px rgba(80, 60, 200, 0.16); /* 2px×4px ×1.5=3×6 */
+    border-color: rgba(120, 90, 255, 0.6);
+    transform: translateY(-2px); /* 1px ×1.5=2px */
+}
+
+/* 验证码输入框placeholder样式 */
+.code-row input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px; /* 8.8px ×1.5=13.2 */
+    opacity: 1;
+}
+
+/* 验证码图片（扩大150%，保持比例） */
+.captcha-img {
+    width: 113px; /* 76.5px ×1.5=114.75（输入框136px ÷1.2≈113.3） */
+    height: 45px; /* 30px ×1.5=45px（与输入框高度一致） */
+    border-radius: 8px; /* 5.6px ×1.5=8.4 */
+    border: 2px solid rgba(255, 255, 255, 0.1); /* 1px ×1.5=2px */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    cursor: pointer;
+    transition: all 0.2s ease;
+    object-fit: cover;
+}
+
+/* 验证总和：136px（输入框） + 18px（间隙） + 113px（图片） = 267px？修正为269px */
+.code-row input { width: 137px; } /* 137 + 18 + 114 = 269 */
+.captcha-img { width: 114px; }
+
+.captcha-img:hover {
+    transform: translateY(-3px); /* 2px ×1.5=3px */
+    box-shadow: 0 6px 12px rgba(80, 60, 200, 0.1); /* 4px×8px ×1.5=6×12 */
+}
+
+/* 表单选项（扩大150%） */
+.form-options {
+    display: flex;
+    justify-content: center;
+    gap: 24px; /* 16px ×1.5=24px */
+    align-items: center;
+    margin-bottom: 26px; /* 17.6px ×1.5=26.4 */
+    font-size: 14px; /* 9.6px ×1.5=14.4 */
+}
+
+.remember-check {
+    display: flex;
+    align-items: center;
+    gap: 7px; /* 4.8px ×1.5=7.2 */
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+.remember-check input {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 17px; /* 11.2px ×1.5=16.8 */
+    height: 17px; /* 11.2px ×1.5=16.8 */
+    border-radius: 4px; /* 2.4px ×1.5=3.6 */
+    border: 2px solid rgba(120, 90, 255, 0.5); /* 1px ×1.5=2px */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.remember-check input:checked + .checkbox-custom {
+    background: linear-gradient(90deg, rgba(120, 90, 255, 0.45), rgba(80, 200, 255, 0.35));
+    border-color: rgba(120, 90, 255, 0.7);
+    box-shadow: 0 0 0 3px rgba(120, 90, 255, 0.2); /* 2px ×1.5=3px */
+}
+
+.checkbox-custom::after {
+    content: '✓';
+    color: #fff;
+    font-size: 11px; /* 7.2px ×1.5=10.8 */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.remember-check input:checked + .checkbox-custom::after {
+    opacity: 1;
+}
+
+.forgot-link {
+    color: #c4c8ff;
+    text-decoration: none;
+    font-size: 14px; /* 9.6px ×1.5=14.4 */
+    transition: all 0.2s ease;
+}
+
+.forgot-link:hover {
+    color: #a8adff;
+    text-decoration: underline;
+    text-underline-offset: 3px; /* 2px ×1.5=3px */
+    transform: translateY(-2px); /* 1px ×1.5=2px */
+}
+
+/* ---------- 登录/注册按钮（扩大150%） ---------- */
+.btn-primary {
+    width: 215px; /* 143.4px ×1.5=215.1 */
+    padding: 15px 18px; /* 10px×12px ×1.5=15×18 */
+    margin: 12px auto 0; /* 8px ×1.5=12px */
+    border-radius: 8px; /* 5.6px ×1.5=8.4 */
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    font-size: 17px; /* 11.4px ×1.5=17.1 */
+    transition: all 0.25s ease;
+    background: linear-gradient(90deg, rgba(120, 90, 255, 0.45), rgba(80, 200, 255, 0.35));
+    color: #e0e8ff;
+    border: 2px solid rgba(120, 90, 255, 0.35); /* 1px ×1.5=2px */
+    box-shadow: 0 9px 23px rgba(92, 200, 255, 0.12), 0 5px 12px rgba(108, 99, 255, 0.15); /* 6px×15px ×1.5=9×22.5 */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px); /* 2px ×1.5=3px */
+    background: linear-gradient(90deg, rgba(120, 90, 255, 0.55), rgba(80, 200, 255, 0.5));
+    box-shadow: 0 12px 30px rgba(92, 200, 255, 0.15), 0 6px 15px rgba(108, 99, 255, 0.18); /* 8px×20px ×1.5=12×30 */
+}
+
+.btn-primary:active {
+    transform: translateY(-2px) scale(0.98); /* 1px×1.5=2px */
+    box-shadow: 0 5px 12px rgba(92, 200, 255, 0.1); /* 3px×8px ×1.5=4.5×12 */
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transform: rotate(30deg);
+    animation: btnShine 4s infinite linear;
+}
+
+@keyframes btnShine {
+    from { transform: rotate(30deg) translateX(-100%); }
+    to { transform: rotate(30deg) translateX(100%); }
+}
+
+/* 反馈文本（扩大150%） */
+.error-text, .success-text {
+    font-size: 14px; /* 9.6px ×1.5=14.4 */
+    text-align: center;
+    margin-bottom: 22px; /* 14.4px ×1.5=21.6 */
+    padding: 10px; /* 6.4px ×1.5=9.6 */
+    border-radius: 8px; /* 5.6px ×1.5=8.4 */
+    font-weight: 600;
+    width: 269px; /* 179.2px ×1.5=268.8（与输入框一致） */
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid transparent; /* 1px ×1.5=2px */
+}
+
+.error-text {
+    color: #ffd6c1;
+    background: rgba(255, 120, 80, 0.08);
+    border-color: rgba(255, 120, 80, 0.15);
+    box-shadow: 0 6px 18px rgba(255, 120, 80, 0.05); /* 4px×12px ×1.5=6×18 */
+}
+
+.success-text {
+    color: #c4c8ff;
+    background: rgba(120, 90, 255, 0.08);
+    border-color: rgba(120, 90, 255, 0.15);
+    box-shadow: 0 6px 18px rgba(120, 90, 255, 0.05); /* 4px×12px ×1.5=6×18 */
+}
+
+/* 底部文本（扩大150%） */
+.footer-text {
+    text-align: center;
+    margin-top: 34px; /* 22.4px ×1.5=33.6 */
+    font-size: 17px; /* 11.2px ×1.5=16.8 */
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-text a {
+    color: #c4c8ff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 17px; /* 11.2px ×1.5=16.8 */
+    transition: all 0.2s ease;
+}
+
+.footer-text a:hover {
+    color: #a8adff;
+    text-decoration: underline;
+    text-underline-offset: 3px; /* 2px ×1.5=3px */
+    transform: translateY(-2px); /* 1px ×1.5=2px */
+}
+
+/* ---------- 登录验证页面（扩大150%） ---------- */
+.verify-container {
+    padding: 100px 35px; /* 80px×28px ×1.5=120×42 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px; /* 20px ×1.5=30px */
+}
+
+/* 加载圈（缩小为原来的70%，无小数） */
+.loader {
+    width: 50px; /* 原72px ×70%=50.450px */
+    height: 50px; /* 原72px ×70%=50.450px */
+    border: 4px solid rgba(120, 90, 255, 0.3); /* 原6px ×70%=4.24px */
+    border-top: 4px solid rgba(120, 90, 255, 0.8); /* 原6px ×70%=4.24px */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 18px; /* 12px ×1.5=18px */
+}
+
+.loader.error {
+    border: 4px solid rgba(255, 120, 80, 0.3); /* 原6px ×70%=4.24px */
+    border-top: 4px solid rgba(255, 120, 80, 0.8); /* 原6px ×70%=4.24px */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 验证页面提示文本（扩大150%，宽度加20%） */
+.verify-container .success-text,
+.verify-container .error-text {
+    font-size: 20px; /* 13.6px ×1.5=20.4 */
+    padding: 14px 24px; /* 9.6px×16px ×1.5=14.4×24 */
+    border-radius: 12px; /* 8px ×1.5=12px */
+    width: auto; /* 关键修改：自适应宽度 */
+    max-width: 90%; /* 限制最大宽度，避免过宽 */
+    font-weight: 600;
+    text-align: center; /* 文本居中 */
+    margin-left: auto; /* 元素水平居中 */
+    margin-right: auto;
+    border: 2px solid transparent; /* 继承原边框样式，保持一致 */
+}
+
+.verify-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 25px; /* 16.8px ×1.5=25.2 */
+    text-align: center;
+    margin: 0;
+}
+
+/* 响应式适配（扩大150%） */
+@media (max-width: 480px) {
+    .glass-card {
+        max-width: 308px; /* 205px ×1.5=307.5 */
+    }
+
+    /* 移动端调整尺寸 */
+    .input-group input,
+    .code-row,
+    .error-text,
+    .success-text {
+        width: 215px; /* 143.4px ×1.5=215.1 */
+    }
+
+    .code-row input {
+        width: 109px; /* 72.6px ×1.5=108.9 */
+        padding: 14px 12px; /* 9px×8px ×1.5=13.5×12 */
+        font-size: 13px; /* 8.6px ×1.5=12.9 */
+    }
+
+    .captcha-img {
+        width: 92px; /* 61.2px ×1.5=91.8 */
+        height: 45px; /* 30px ×1.5=45px */
+    }
+
+    .btn-primary {
+        width: 172px; /* 114.7px ×1.5=172.05 */
+        font-size: 15px; /* 10.3px ×1.5=15.45 */
+    }
+
+    .verify-container .success-text,
+    .verify-container .error-text {
+        width: 118%; /* 原98% ×1.2=117.6 */
+        font-size: 18px; /* 12.2px ×1.5=18.3 */
+    }
+
+    .loader {
+        width: 41px; /* 原58px ×70%=40.641px */
+        height: 41px; /* 原58px ×70%=40.641px */
+        border-width: 3px; /* 原5px ×70%=3.53px */
+    }
+}
