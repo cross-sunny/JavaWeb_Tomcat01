@@ -11,7 +11,7 @@
 </head>
 <body>
 <canvas id="particle-canvas"></canvas>
-
+<%-- 匹配web目录下的styles.css --雷霆%>
 <div class="main-container">
   <div class="glass-card">
     <div class="content-section">
